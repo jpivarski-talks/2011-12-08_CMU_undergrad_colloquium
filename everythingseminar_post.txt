@@ -1,0 +1,147 @@
+In explanations of particle physics it's often taken for granted that matter always appears in indivisible units. For example, "two quarks collide, form a W boson, and the W boson decays into a muon and a neutrino." No one ever says "half a W boson" or "2/3 of a muon and a one-and-a-quarter a neutrinos" or anything like that. This appeals to our intuition that when matter is cut up into smaller and smaller pieces, we must eventually arrive at a smallest piece--- an intuition we share with Democritus and Newton. It also ignores our intuition that, if we try hard enough, we ought to be able to cut these pieces as well--- an intuition we share with continuum mechanists of the late 19th century. As with all speculations about ultimate things, we want it both ways: we want to find "the beginning" and then also look "before the beginning," which would make what we called the beginning not really the beginning after all.
+
+Whether matter ultimately comes in building blocks or a continuous mush seems like the sort of question that can never be settled: building blocks might be eventually breakable and mush might at some level be granular. But in our current theory of matter, indivisible building blocks are derived mathematically from the mush of space-filling fields: we can have it both ways. The picture presented by the quantum field theory framework, in which the Standard Model of particle physics is a special case, shows where the discreteness of particles comes from without the confusing "sometimes wave--sometimes particle" language of early 20th century quantum mechanics.
+
+This is something everyone should know about, but quantum field theory classes are usually only taught in grad school because of the mathematical sophistication needed to fully develop the subject. Just answering the question of how to think about fields and particles, however, can be done with an undergraduate physics or math background. In this article, I'll show how a field-theory picture of the world (fields like electric and magnetic fields) is "quantized," adding degrees of freedom and at the same time restricting the possible excitations of the fields to discrete units corresponding to individual particles. I'll use math at the level of differential equations (usually the fourth semester of a standard calculus sequence) and assume familiarity with basic quantum mechanics (at the level of the Schrödinger equation, usually a sophomore physics course). All of the variables represent real or complex numbers, and everything can be plotted with a graphing calculator.  (No non-commutative operators or infinite-dimensional Hilbert spaces!)
+
+Introduction
+
+This article is long because I need to introduce the path integral formulation of quantum mechanics and the basic idea of quantum field theory to motivate the equation from which particles are derived. If these are familiar to you, you may want to skim to part 4 or just refer to parts 1--3 for notation. Here's an outline of the argument:
+
+   1. quantum mechanics can be expressed as path integrals rather than probability waves;
+   2. probability waves and the Schrödinger equation can be derived from these path integrals;
+   3. quantum field theory is a generalization of quantum mechanics that doesn't assume the existence of particles from the start;
+   4. a Schrödinger-like differential equation can be derived for quantum field theory, too;
+   5. we solve the differential equation with undergrad techniques and see exactly why mass is quantized.
+
+Parts 1--3 are standard textbook stuff, but parts 4 and 5 are usually presented in Heisenberg's operator-based formalism. Doing it with differential equations not only makes it accessible to more people, but also makes me more comfortable with it because I can draw it and look at it.
+1. The path integral formulation
+
+Quantum mechanics and quantum field theory can each be derived from several different formalisms, but all of the formalisms yield the same results. You're probably most familiar with the following:
+
+    * the position of a particle is uncertain, distributed in space according to a wavefunction;
+    * the way the wavefunction changes while not being observed is described by the Schrödinger equation;
+    * the wavefunction collapses to a small region of space when its position is detected.
+
+The idea that matter might be a wave was inspired by the observation that particles interfere with themselves while propagating through space. But the same observation can motivate a different picture: one in which the particles are point-like objects which follow multiple paths between observations, re-converging on the observation point. This is the Feynman path integral idea.
+
+Let's start with a reminder of the two-slit experiment, the classic demonstration of interference. When a wave passes through two slits (holes) in an otherwise opaque screen, waves eminating from the slits superimpose and result in an intensity distribution at a distant detector that has peaks of constructive interference and troughs of destructive interference. The intensity at a given point $latex I(x)$ is determined by the difference in the length of the two paths because the phase cycles a little more in the longer path than the shorter one.
+
+In the above example, the phase difference at $latex x$ is $latex d (2\pi/\lambda)$ where $latex \lambda$ is the wavelength of the wave. A phase difference of $latex 0$ or $latex 2\pi$ results in full intensity while a phase difference of $latex \pm\pi$ results in no intensity.
+
+The same experiment performed with electrons (or any other particle as long as $latex d \sim \lambda$ for de Broglie wavelength $latex \lambda$) results in a similar distribution, indicating that they, too, are waves. When electrons are passed through the screen individually, each electron arrives at the detector as a whole particle in one $latex x$ position, but $latex x$ is random with a probability distribution $latex P(x) \propto I(x)$.
+
+Now we might ask (as Feynman did), what if we put three slits in the screen?
+
+We should get the superposition of three paths, and the distribution could be complicated if the two phase differences are not the same. Moreover, what if there are multiple screens?
+
+Now the number of paths multiplies (not all of the possibilities are drawn above). Each path contributes to the wave at $latex x$ with different phases, depending on their relative lengths.  If the contributions mostly cancel, the wave intensity/particle probability is small, but if they line up coherently, the intensity/probability is large.
+
+Here's the logical leap: if we remove all the screens, that's equivalent to having infinitely many screens that are so full of slits that they are nothing but holes--- in other words, nothing. So particles propagating through space are like infinitely many paths interfering with each other all the way from source to destination. This can be formalized into a general theory of quantum mechanics:
+
+    * every path $latex x(t)$ from source $latex x_a$, time $latex 0$ to destination $latex x_b$, time $latex t$ is associated with an abstract phase $latex S[x(t)]/\hbar$;
+    * each path therefore has an abstract amplitude $latex \mathcal{U}[x(t)] = \exp(i \, S[x(t)]/\hbar)$;
+    * the probability of the transition from $latex (x_a, 0)$ to $latex (x_b, t)$ is the square of the sum of all amplitudes;
+    * the phase $latex S[x(t)]$ is the action from classical physics, the time-integral of kinetic energy minus potential energy (the Lagrangian). This is where the "path integral" theory gets its name: each $latex S$ is determined by integrating $latex \int_0^t dt' \, (\mbox{kinetic} - \mbox{potential})$ along the path $latex x(t)$ (I use square brackets to indicate that $latex S$ is a function of the whole path).
+
+Before getting into the technical details, such as how to sum over an infinite set of paths, let's consider a simple example. The original two-slit case (first figure, above) has particles propagating through empty space, with the exception of the screen. The action is kinetic energy $latex \frac{1}{2}mv^2$ ($latex m$ is mass and $latex v$ is velocity) minus zero potential energy, so the actions of the two labeled paths are
+
+$latex \displaystyle S_1 = \int_0^t dt' \, \frac{1}{2}m{v_1}^2 = \frac{1}{2}m{v_1}^2 t = \frac{m}{2}\left(\frac{D}{t}\right)^2 t$
+
+$latex \displaystyle S_2 = \int_0^t dt' \, \frac{1}{2}m{v_2}^2 = \frac{1}{2}m{v_2}^2 t = \frac{m}{2}\left(\frac{d + D}{t}\right)^2 t$
+
+Their difference is $latex S_2/\hbar - S_1/\hbar = (mDd)/(t\hbar)$.  The de Broglie hypothesis relates momentum to wavelength $latex p = 2\pi\hbar/\lambda$ and $latex p = mD/t$, so the difference in action is $latex d(2\pi/\lambda)$.  All other paths cancel, leading to the same result we obtained from geometry.
+
+The trickiest part of the path integral formulation is figuring out how to "sum the amplitudes of all paths." The number of paths is very infinite. Recall that an integral in calculus can be defined as a sum in which the number of terms limits to infinity--- what we need is multiple integration in which the number of integrals limits to infinity.  Each of our paths $latex x(t)$ can be approximated as a sequence of numbers $latex x_1 \ldots x_N$ by subdividing the total time $latex t$ into $latex N$ subintervals of width $latex \Delta t$.
+
+Using this procedure to sum over all paths, the total amplitude is
+
+$latex \displaystyle \mathcal{U}(x_a, x_b, t) = \sum_j \mathcal{U}_j = \lim_{\Delta t\to 0} \int_{-\infty}^\infty \frac{dx_1}{C(\Delta t)} \cdots \int_{-\infty}^\infty \frac{dx_N}{C(\Delta t)} \, \mathcal{U}[x(t)]$
+
+with $latex C(\Delta t)$ defined in such a way as to make $latex \mathcal{U}(x_a, x_b, t)$ continuous in $latex t$.  In the next section, we'll see a specific expression for $latex C(\Delta t)$.
+
+To make $latex \mathcal{U}[x(t)]$ explicit, let's choose an action. The following is general enough for most physics problems:
+
+$latex \displaystyle S = \int_0^T dt \, \left(\frac{1}{2}m\left(\frac{\partial x}{\partial t}\right)^2 - V(x)\right)$.
+
+Since we have subdivided the time interval into a finite number of steps, the path integral becomes a discrete sum
+
+$latex \displaystyle S = \sum_i^N \left(\frac{1}{2}m\frac{(x_{i+1} - x_i)^2}{\Delta t} - \Delta t \, V(x_i)\right)$,
+
+Now at least we can write out one of the soon-to-be-infinitely many integrals.
+
+$latex \displaystyle \mathcal{U}(x_a, x_b, t) = \lim_{\Delta t \to 0} \int_{-\infty}^\infty \frac{dx'}{C(\Delta t)} \exp\bigg(i\bigg(\frac{m(x_b - x')^2}{2 \Delta t}$
+
+$latex \displaystyle - \Delta t \, V(x_b)\bigg)\bigg) \, \mathcal{U}(x_a, x', t-\Delta t)$.
+
+That is, summing over all paths from $latex (x_a, 0)$ to $latex (x_b, t)$ is like summing over all paths from $latex (x_a, 0)$ to $latex (x', t - \Delta t)$ and then summing that over all the possible ways of getting from $latex (x', t - \Delta t)$ to $latex (x_b, t)$. The complete integrand could be written by expanding $latex \mathcal{U}(x_a, x', t-\Delta t)$ in the same way, but this is enough for our purposes.
+
+One more technicality: the integral I wrote above oscillates instead of converging, like $latex \int_{-\infty}^\infty dx \, e^{ix}$. Since we're still defining the theory, we can redefine it in a way which does converge, replacing $latex e^{ix}$ with $latex e^{i(1+i\epsilon)x}$ and then letting $latex \epsilon \to 0$ (the Feynman prescription). With this correction, the full expression becomes
+
+$latex \displaystyle \mathcal{U}(x_a, x_b, t) = \lim_{\epsilon \to 0} \lim_{\Delta t \to 0} \int_{-\infty}^\infty \frac{dx'}{C(\Delta t)} \exp\bigg(i(1+i\epsilon)$
+
+$latex \displaystyle \bigg(\frac{m(x_b - x')^2}{2 \Delta t} - \Delta t \, V(x_b)\bigg)\bigg) \, \mathcal{U}(x_a, x', t-\Delta t)$.
+2. Deriving the Schrödinger equation
+
+In the traditional approach to quantum mechanics, the amplitude is expressed as a wavefunction $latex \psi(x, t)$ at a given time $latex t$, rather than a transition between two space-time points $latex (x_a, 0)$ and $latex (x_b, t)$. If an initial condition $latex \psi(x_a, 0)$ is given, the probability that the particle will be found in a region $latex x_b \pm \Delta x/2$ is
+
+$latex \displaystyle \int_{x_b - \Delta x/2}^{x_b + \Delta x/2} dx \, \left| \psi(x, t) \right|^2$.
+
+Therefore, we should be able to identify $latex \mathcal{U}(x_a, x_b, t)$ as $latex \psi(x_b, t)$ with initial conditions $latex \psi(x_a, 0)$ built-in. Also, the Schrödinger equation,
+
+$latex \displaystyle i\frac{\partial}{\partial t}\psi(x,t) = \left(-\frac{1}{2m}\frac{\partial^2}{\partial x^2} + V(x)\right) \psi(x, t)$,
+
+which describes the evolution of $latex \psi(x, t)$ from one infinitesimal time-step to the next, should follow from our sum over paths formula. In this section, I'll derive the familiar Schrödinger equation of quantum mechanics so that I can later use this derivation to motivate a Schrödinger-like equation for quantum field theory.
+
+The sum over paths written at the end of the last section,
+
+$latex \displaystyle \mathcal{U}(x_a, x_b, t) = \lim_{\epsilon \to 0} \lim_{\Delta t \to 0} \int_{-\infty}^\infty \frac{dx'}{C(\Delta t)}$
+
+$latex \displaystyle \exp\left(i(1+i\epsilon) \left(\frac{m(x_b - x')^2}{2 \Delta t}\right)\right)$
+
+$latex \displaystyle \exp\bigg(-i(1+i\epsilon)\Delta t \, V(x_b)\bigg) \, \mathcal{U}(x_a, x', t-\Delta t)$,
+
+expresses the last time step in terms of the second-to-last time step, which is what we need to derive a differential equation. In the integrand, we can assume that $latex \Delta t$ is small because we'll be limiting it to zero, so
+
+$latex \displaystyle \exp\bigg(-i(1+i\epsilon)\Delta t \, V(x_b)\bigg) \approx 1 - i\Delta t \, V(x_b)$.
+
+We also know that exponentials with large $latex |x' - x_b|$ will contribute negligibly (because of the $latex i\epsilon$), so let's expand $latex \mathcal{U}(x_a, x', t-\Delta t)$ to second-order in $latex (x' - x_b)$.
+
+$latex \displaystyle \mathcal{U}(x_a, x_b, t) = \lim_{\epsilon \to 0} \lim_{\Delta t \to 0} \int_{-\infty}^\infty \frac{dx'}{C(\Delta t)}$
+
+$latex \displaystyle \exp\left(i(1+i\epsilon) \left(\frac{m(x_b - x')^2}{2 \Delta t}\right)\right) \big(1 - i\Delta t \, V(x_b)\big)$
+
+$latex \displaystyle \left(1 + (x' - x_b)\frac{\partial}{\partial x_b} + \frac{1}{2}(x' - x_b)^2\frac{\partial^2}{\partial {x_b}^2} \right)\mathcal{U}(x_a, x', t-\Delta t)$.
+
+Now we can use Gaussian integration formulae
+
+$latex \displaystyle \int_{-\infty}^\infty d\xi \, e^{-b\xi^2} = \sqrt{\frac{\pi}{b}}\mbox{,} \int_{-\infty}^\infty d\xi \, \xi e^{-b\xi^2} = 0\mbox{,} \int_{-\infty}^\infty d\xi \, \xi^2 e^{-b\xi^2} = \frac{1}{2b} \sqrt{\frac{\pi}{b}}$
+
+to evaluate the expression in the $latex \epsilon \to 0$ limit:
+
+$latex \displaystyle \mathcal{U}(x_a, x_b, t) = \lim_{\Delta t \to 0} \left(\frac{1}{C(\Delta t)}\sqrt{\frac{2\pi\Delta t}{-i m}}\right)$
+
+$latex \displaystyle \left(1 - i\Delta t \, V(x_b) + \frac{i\Delta t}{2m}\frac{\partial^2}{\partial {x_b}^2}\right) \mathcal{U}(x_a, x_b, t - \Delta t)$.
+
+To make $latex \mathcal{U}(x_a, x_b, t)$ continuous, $latex C(\Delta t)$ must be $latex \displaystyle \sqrt{\frac{-im}{2\pi\Delta t}}$.
+Re-arranging this slightly, we have
+
+$latex \displaystyle i\left(\frac{\mathcal{U}(x_a, x_b, t) - \mathcal{U}(x_a, x_b, t-\Delta t)}{\Delta t}\right) =$
+
+$latex \displaystyle \left(\frac{-1}{2m}\frac{\partial^2}{\partial {x_b}^2} + V(x_b) \right) \mathcal{U}(x_a, x_b, t - \Delta t)$.
+
+The left-hand side is the definition of a derivative, so this gives us the Schrödinger Equation:
+
+$latex \displaystyle i\frac{\partial}{\partial t}\mathcal{U}(x_a, x_b, t) = \left(-\frac{1}{2m}\frac{\partial^2}{\partial {x_b}^2} + V(x_b)\right) \mathcal{U}(x_a, x_b, t)$
+
+with $latex \mathcal{U}(x_a, x_b, t) = \psi(x_b, t)$.
+
+What this derivation is telling us is that the cloud of possible positions $latex x_b$ that a particle can spread into is actually the endpoints of infinitely many paths starting at $latex x_a$. A 3-D picture of this would look like the following:
+
+Incidentally, the most troublesome part of the wavefunction point of view is that the collapse of the wavefunction into a small region determined by the measurement device is not in the Schrödinger equation: it's an add-on to the theory, not clear how it fits in. In the path integral point of view,
+3. Quantum field theory
+
+alsdkjf
+
+adsflk
+
